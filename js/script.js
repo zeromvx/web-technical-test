@@ -16,8 +16,7 @@ function render() {
         .then( res => res.json())
 
         .then( data => {
-             
-            for (let i = 0; i < data.length; i++) {
+            for (let i = data.length - 1; i > -1; i--) {
                 
                 let promotion = document.createElement('li');   // create new promotion
                 promotion.classList.add('promotion');
@@ -33,11 +32,11 @@ function render() {
                     <button class="btn btn--join"> ${data[i].joinNowButtonText} </button>
                 </div>`;
                 
-                allPromotions.prepend(promotion);
+                allPromotions.innerHTML += promotion.outerHTML;
 
                 //check for promotions for new customers
                 if (data[i].onlyNewCustomers) {
-                    forNewCustomers.prepend(promotion);
+                    forNewCustomers.innerHTML += promotion.outerHTML;
                 }
             }
         });
