@@ -66,6 +66,7 @@ li {
     padding: .5rem 1rem;
     background: none;
     border: .5px solid #8090A5;
+}
 
 @media screen and (max-width: 425px) {
     .container {
@@ -73,7 +74,7 @@ li {
     }
 }
 
-@keyframes fadeEffect {
+/* @keyframes fadeEffect {
     from {opacity: 0;}
     to {opacity: 1;}
-}
+} */
