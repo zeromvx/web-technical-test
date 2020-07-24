@@ -1,7 +1,7 @@
-const promotionSections = document.querySelectorAll('.promotion__list');
-const allPromotions = document.querySelector('.promotion--all');
-const forNewCustomers = document.querySelector('.promotion--new');
-const switchBtns = document.querySelectorAll('.tab');
+const promotionSections = document.querySelectorAll('.promotion__list');    // promotion`s block
+const allPromotions = document.querySelector('.promotion--all');        // promotions for all users
+const forNewCustomers = document.querySelector('.promotion--new');      // promotions for new users
+const switchBtns = document.querySelectorAll('.tab');                   // btn for switch tabs
 
 document.addEventListener("DOMContentLoaded", render);
 
@@ -12,17 +12,22 @@ switchBtns.forEach(item => {
 function render() {
 
     fetch('http://www.mocky.io/v2/5bc3b9cc30000012007586b7')
-        .then( res => res.json())
-        .then(data => {
-             
-            for (let i =0; i < data.length; i++) {
 
-                let promotion = document.createElement('li');
+        .then( res => res.json())
+
+        .then( data => {
+             
+            for (let i = 0; i < data.length; i++) {
+                
+                let promotion = document.createElement('li');   // create new promotion
                 promotion.classList.add('promotion');
 
                 promotion.innerHTML = `
-                <h2> ${data[i].name} </h2>
-                <p> ${data[i].description} </p>
+                <div class="promotion__logo">
+                    <img src="${data[i].heroImageUrl}" alt="logo"/>
+                </div>
+                <h2 class="promotion__title"> ${data[i].name} </h2>
+                <p class="promotion__descr"> ${data[i].description} </p>
                 <div class="btn-area"> 
                     <button class="btn btn--term"> ${data[i].termsAndConditionsButtonText} </button>
                     <button class="btn btn--join"> ${data[i].joinNowButtonText} </button>
@@ -30,6 +35,7 @@ function render() {
                 
                 allPromotions.prepend(promotion);
 
+                //check for promotions for new customers
                 if (data[i].onlyNewCustomers) {
                     forNewCustomers.prepend(promotion);
                 }
@@ -38,7 +44,9 @@ function render() {
 }
 
 function changeContent(e) {
+
     for (let section of promotionSections) {
+        
         if (this.dataset['section'] !=  section.dataset['section']) {
             section.style.display = "none";
         } else {
@@ -49,5 +57,6 @@ function changeContent(e) {
     for (let btn of switchBtns) {
         btn.classList.remove('tab--active');
     }
+
     e.target.classList.add('tab--active');
 }

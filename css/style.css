@@ -49,10 +49,27 @@ li {
 
 .promotion {
     margin: 1rem 0;
-    padding: .5rem;
+    padding: 1rem;
     width: 100%;
     text-align: center;
     background: #f2f2f2;
+}
+
+.promotion__logo {
+    position: relative;
+    width: 100%;
+}
+
+.promotion__logo img {
+    width: 100%;
+}
+
+.promotion__title {
+    margin: .5rem 0;
+}
+
+.promotion__descr {
+    margin: .5rem 0;
 }
 
 .btn-area {
@@ -64,17 +81,33 @@ li {
 
 .btn {
     padding: .5rem 1rem;
-    background: none;
     border: .5px solid #8090A5;
+    border-radius: 5px;
+    background: none;
+    cursor: pointer;
+}
+
+.btn--join {
+    background: #48515F;
+    color: #ffffff
 }
 
 @media screen and (max-width: 425px) {
+
+    body {
+        font-size: .9rem;
+    }
+    
     .container {
         padding: 1rem;
     }
+
+    .btn {
+        font-size: .85rem;
+    }
 }
 
-/* @keyframes fadeEffect {
+@keyframes fadeEffect {
     from {opacity: 0;}
     to {opacity: 1;}
-} */
+}
