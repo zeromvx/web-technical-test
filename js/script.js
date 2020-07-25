@@ -2,6 +2,7 @@ const promotionSections = document.querySelectorAll('.promotion__list');    // p
 const allPromotions = document.querySelector('.promotion--all');        // promotions for all users
 const forNewCustomers = document.querySelector('.promotion--new');      // promotions for new users
 const switchBtns = document.querySelectorAll('.tab');                   // btn for switch tabs
+const preloader = document.querySelector('.preloader');
 
 document.addEventListener("DOMContentLoaded", render);
 
@@ -13,7 +14,16 @@ function render() {
 
     fetch('http://www.mocky.io/v2/5bc3b9cc30000012007586b7')
 
-        .then( res => res.json())
+        .then( res => {
+
+            if (res.ok) {
+
+                preloader.style.display = "none";
+
+                return res.json();
+            }
+
+        })
 
         .then( data => {
             for (let i = data.length - 1; i > -1; i--) {
