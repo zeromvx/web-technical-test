@@ -38,10 +38,10 @@ function render() {
                 </div>`;
                 
                 allPromotions.insertAdjacentElement('beforeend', promotion);
-                
+
                 //check for promotions for new customers
                 if (data[i].onlyNewCustomers) {
-                    forNewCustomers.insertAdjacentElement('beforeend', promotion);
+                    forNewCustomers.insertAdjacentHTML('beforeend', promotion.outerHTML);
                 }
             }
         });
