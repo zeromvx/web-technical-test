@@ -4,12 +4,6 @@ const forNewCustomers = document.querySelector('.promotion--new');      // promo
 const switchBtns = document.querySelectorAll('.tab');                   // btn for switch tabs
 const preloader = document.querySelector('.preloader');
 
-document.addEventListener("DOMContentLoaded", render);
-
-switchBtns.forEach(item => {
-    item.addEventListener('click', changeContent);
-});
-
 function render() {
 
     fetch('https://run.mocky.io/v3/00f6d282-f4ab-4281-b115-d5a7a00fff19')
@@ -47,20 +41,35 @@ function render() {
         });
 }
 
-function changeContent(e) {
+const changeContent = (function() {
+    let activeTab = document.querySelector('.tab--active');
 
-    for (let section of promotionSections) {
-        
-        if (this.dataset['section'] !=  section.dataset['section']) {
-            section.style.display = "none";
-        } else {
-            section.style.display = "block";
+    return function(item) {
+
+        if (activeTab) {
+            activeTab.classList.remove('tab--active');
         }
-    }
+        
+        activeTab = item;
+        item.classList.add('tab--active');
 
-    for (let btn of switchBtns) {
-        btn.classList.remove('tab--active');
+        for (let section of promotionSections) {
+        
+            if (item.dataset['section'] !=  section.dataset['section']) {
+                section.style.display = "none";
+            } else {
+                section.style.display = "block";
+            }
+        }
+        
     }
+}());
 
-    e.target.classList.add('tab--active');
+document.addEventListener("DOMContentLoaded", render);
+
+for (let btn of switchBtns) {
+    btn.addEventListener('click', () => {
+        changeContent(btn);
+        
+    })
 }
