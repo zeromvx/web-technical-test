@@ -37,11 +37,11 @@ function render() {
                     <button class="btn btn--join"> ${data[i].joinNowButtonText} </button>
                 </div>`;
                 
-                allPromotions.innerHTML += promotion.outerHTML;
-
+                allPromotions.insertAdjacentElement('beforeend', promotion);
+                
                 //check for promotions for new customers
                 if (data[i].onlyNewCustomers) {
-                    forNewCustomers.innerHTML += promotion.outerHTML;
+                    forNewCustomers.insertAdjacentElement('beforeend', promotion);
                 }
             }
         });
